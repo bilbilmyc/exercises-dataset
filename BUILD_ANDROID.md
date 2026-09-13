@@ -17,7 +17,7 @@
 | 竖屏锁定 | `AndroidManifest.xml` 固定 portrait |
 | 启动屏 | 品牌橙底 + 哑铃 + 应用名,替换了全部 11 个 `splash.png` |
 | 应用图标 | 自适应图标(前景哑铃 + 品牌色背景),由 `scripts/generate-app-assets.py` 生成 |
-| 状态栏/导航栏 | 浅灰底、深色图标,与页面主题一致,启动无白屏闪烁 |
+| 状态栏/导航栏 | 浅灰底、深色图标,与页面主题一致,启动无白屏闪烁;edge-to-edge 下用 `env(safe-area-inset-top)` 安全区 padding 防止内容与状态栏重叠 |
 | 网页感去除 | 移除 "DB Setup" 开发者入口(避免 WebView 唤起外部浏览器)、锁定页面缩放、禁用橡皮筋回弹与长按选中(`app/app.css`) |
 
 ## 1. 环境要求

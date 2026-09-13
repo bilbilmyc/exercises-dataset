@@ -3,13 +3,13 @@
   "appName": "哈哈健身",
   "webDir": "www",
   "backgroundColor": "#f4f4f5",
-  "android": {
-    "adjustMarginsForEdgeToEdge": "auto"
-  },
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 800,
       "launchAutoHide": true
+    },
+    "SystemBars": {
+      "initialViewportFitValueHint": "cover"
     }
   }
 }

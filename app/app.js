@@ -1,20 +1,11 @@
-/* Capacitor 原生交互层:硬件返回键、双击退出、状态栏。
-   仅在安卓 app 环境生效,浏览器中自动跳过。 */
+/* Capacitor 原生交互层:硬件返回键、双击退出。
+   仅在安卓 app 环境生效,浏览器中自动跳过。状态栏外观由原生主题(styles.xml)负责。 */
 (function () {
   function boot() {
     var Cap = window.Capacitor;
     if (!Cap || !Cap.Plugins || !Cap.Plugins.App) return;
     var App = Cap.Plugins.App;
     var Toast = Cap.Plugins.Toast;
-    var StatusBar = Cap.Plugins.StatusBar;
-
-    // 状态栏与页面底色一致(浅色主题 + 深色图标)
-    try {
-      if (StatusBar) {
-        StatusBar.setStyle({ style: 'LIGHT' });
-        StatusBar.setBackgroundColor({ color: '#f4f4f5' });
-      }
-    } catch (e) { /* Android 15+ edge-to-edge 下为 no-op */ }
 
     var lastBack = 0;
     App.addListener('backButton', function () {

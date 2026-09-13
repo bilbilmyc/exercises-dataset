@@ -1,5 +1,12 @@
 /* App 原生化样式层(仅安卓 app 注入,不影响仓库原版页面) */
 
+/* Edge-to-edge:内容整体下移到状态栏之下(取 env 与 Capacitor 注入变量的较大值,
+   电脑浏览器中两者均为 0,不影响预览) */
+.app-shell {
+  box-sizing: border-box;
+  padding-top: max(env(safe-area-inset-top, 0px), var(--safe-area-inset-top, 0px));
+}
+
 /* 禁止橡皮筋回弹与整页滚动链 */
 html {
   overscroll-behavior: none;
