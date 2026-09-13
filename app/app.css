@@ -1,0 +1,51 @@
+/* App 原生化样式层(仅安卓 app 注入,不影响仓库原版页面) */
+
+/* 禁止橡皮筋回弹与整页滚动链 */
+html {
+  overscroll-behavior: none;
+}
+body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 固定浅色配色,避免系统深色模式强制反色 */
+:root {
+  color-scheme: light;
+}
+
+/* 触控体验:去除长按选中/呼出菜单 */
+img,
+.card-media,
+.modal-media,
+pre,
+code {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+button,
+.chip,
+.exercise-card,
+.lang-tab,
+.active-badge {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 底部手势条安全区 */
+.grid-wrapper {
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+}
+.modal-panel {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.sidebar-body {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+/* 搜索框获得焦点时页面不被键盘顶飞 */
+.sidebar-body .search-wrapper {
+  position: relative;
+}

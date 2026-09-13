@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 品牌色:哈哈健身(与页面 accent 色一致) -->
+    <color name="colorPrimary">#FF4F00</color>
+    <color name="colorPrimaryDark">#E64700</color>
+    <color name="colorAccent">#FF4F00</color>
+</resources>

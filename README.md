@@ -447,16 +447,18 @@ console.log("First 6 exercises:", randomWorkout.map(e => e.name));
 
 ## 📱 Android App
 
-This fork ships a ready-to-use [Capacitor](https://capacitorjs.com/) project that packages the interactive browser plus **all 1,324 exercise animation GIFs** (embedded byte-identical, zero recompression) into a fully offline Android app — app name: **哈哈健身**.
+This fork ships a ready-to-use [Capacitor](https://capacitorjs.com/) project that packages the interactive browser plus **all 1,324 exercise animation GIFs** (embedded byte-identical, zero recompression) into a fully offline Android app — app name: **哈哈健身**, UI in **Simplified Chinese** by default (instruction steps remain switchable across all 10 languages).
+
+Native adaptations include a branded adaptive icon & splash screen, hardware back-button handling (double-press to exit), portrait lock, themed status/navigation bars, and removal of the developer-only "DB Setup" entry. See [BUILD_ANDROID.md](BUILD_ANDROID.md) (中文) for the full adaptation list, environment requirements and build steps.
 
 ```bash
 npm install
 npm run apk
 ```
 
-The debug APK is written to `android/app/build/outputs/apk/debug/app-debug.apk` (~142 MB). Environment requirements, manual step-by-step instructions and customization (app name, icon, version) are documented in **[BUILD_ANDROID.md](BUILD_ANDROID.md)** (中文).
+The debug APK is written to `android/app/build/outputs/apk/debug/app-debug.apk` (~140 MB).
 
-> `www/` and `android/app/src/main/assets/public/` are generated copies of the site assets and are git-ignored — never edit them directly; `npm run apk` / `npx cap sync android` regenerates them from the repository root.
+> `www/` and `android/app/src/main/assets/public/` are generated copies and are git-ignored — never edit them directly; `npm run apk` / `npx cap sync android` regenerates them. The repository-root `index.html` always stays the original English version; the Chinese app layer is applied at build time (`scripts/prepare-www.mjs` + `app/`).
 
 ---
 
