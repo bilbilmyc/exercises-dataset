@@ -45,28 +45,33 @@ npm install
 npm run apk
 ```
 
-`npm run apk` 会依次完成三件事:
+`npm run apk` 会依次完成四件事:
 
-1. `npm run www` — 把 `index.html`、`setup.html`、`data/`、`images/`、`videos/` 拷贝到 `www/`(由 `scripts/prepare-www.mjs` 完成,跨平台);
+1. `node scripts/prepare-www.mjs` — 生成中文 app 化的 `www/`(翻译界面与数据、移除 DB Setup、注入 app 层,详见第 7 节);
 2. `npx cap sync android` — 把 `www/` 同步进安卓工程资源目录;
-3. `cd android && gradlew assembleDebug` — Gradle 构建出 APK。
+3. `cd android && gradlew assembleDebug` — Gradle 构建出 APK;
+4. `node scripts/dist.mjs` — 把 APK 以「应用名-v版本号」复制到 `dist/`,并清理旧版本。
 
-产物位置:
+产物位置(dist 目录,文件名带应用名与版本号,始终只有最新一份):
 
 ```
-android/app/build/outputs/apk/debug/app-debug.apk
+dist/哈哈健身-v1.1.0.apk
 ```
+
+(Gradle 原始输出在 `android/app/build/outputs/apk/debug/app-debug.apk`;`dist/` 已 gitignore。)
 
 > macOS / Linux 用户请把 `package.json` 中 `apk` 脚本里的 `gradlew` 换成 `./gradlew`,或直接按下面的手动步骤执行。
 
 ## 3. 手动分步(与一键打包等价)
 
 ```bash
-npm install           # 安装 Capacitor 依赖
-npm run www           # 生成 www/
-npx cap sync android  # 同步进安卓工程
+npm install                # 安装 Capacitor 依赖
+npm run www                # 生成中文 app 化的 www/
+npx cap sync android       # 同步进安卓工程
 cd android
-./gradlew assembleDebug   # Windows 用 gradlew 或 gradlew.bat
+./gradlew assembleDebug    # Windows 用 gradlew 或 gradlew.bat
+cd ..
+node scripts/dist.mjs      # 复制到 dist/哈哈健身-v<版本>.apk
 ```
 
 ## 4. 电脑端预览(改界面先看效果)
