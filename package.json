@@ -7,7 +7,7 @@
   "scripts": {
     "www": "node scripts/prepare-www.mjs",
     "sync": "npm run www && cap sync android",
-    "apk": "npm run sync && cd android && gradlew assembleDebug"
+    "apk": "npm run sync && cd android && gradlew assembleDebug && cd .. && node scripts/dist.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",

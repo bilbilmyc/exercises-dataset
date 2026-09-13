@@ -11,3 +11,6 @@ __pycache__/
 node_modules/
 www/
 preview/
+
+# 构建产物交付目录
+dist/
