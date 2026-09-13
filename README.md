@@ -47,6 +47,7 @@
 - [Data Schema](#-data-schema)
 - [Sample Exercises](#-sample-exercises)
 - [Usage Examples](#-usage-examples)
+- [Android App](#-android-app)
 - [License & Use](#-license--use)
 
 ---
@@ -441,6 +442,21 @@ const data = exercises as Exercise[];
 const randomWorkout: Exercise[] = data.slice(0, 6);
 console.log("First 6 exercises:", randomWorkout.map(e => e.name));
 ```
+
+---
+
+## 📱 Android App
+
+This fork ships a ready-to-use [Capacitor](https://capacitorjs.com/) project that packages the interactive browser plus **all 1,324 exercise animation GIFs** (embedded byte-identical, zero recompression) into a fully offline Android app — app name: **哈哈健身**.
+
+```bash
+npm install
+npm run apk
+```
+
+The debug APK is written to `android/app/build/outputs/apk/debug/app-debug.apk` (~142 MB). Environment requirements, manual step-by-step instructions and customization (app name, icon, version) are documented in **[BUILD_ANDROID.md](BUILD_ANDROID.md)** (中文).
+
+> `www/` and `android/app/src/main/assets/public/` are generated copies of the site assets and are git-ignored — never edit them directly; `npm run apk` / `npx cap sync android` regenerates them from the repository root.
 
 ---
 

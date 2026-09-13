@@ -1,0 +1,17 @@
+{
+  "name": "exercises-dataset",
+  "version": "1.0.0",
+  "description": "Capacitor packaging for the Exercises Dataset interactive browser as an offline Android app.",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "www": "node scripts/prepare-www.mjs",
+    "sync": "npm run www && cap sync android",
+    "apk": "npm run sync && cd android && gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2"
+  }
+}
