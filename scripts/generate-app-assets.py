@@ -98,10 +98,11 @@ def legacy_icon(size, light=False):
     return out
 
 def adaptive_foreground(size):
-    """自适应图标前景:图形落在中央 66% 安全区。"""
+    """自适应图标前景:图形落在中央 66% 安全区内,尽量放大(A2 杠铃斜放时
+    最远点半径约为图形尺寸的 0.43,取 0.66 画布宽度时刚好不越界)。"""
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    glyph = glyph_for_style(int(size * 0.40), WHITE + (255,))
-    img.alpha_composite(glyph, (int(size * 0.30), int(size * 0.30)))
+    glyph = glyph_for_style(int(size * 0.66), WHITE + (255,))
+    img.alpha_composite(glyph, (int(size * 0.17), int(size * 0.17)))
     return img
 
 def splash(w, h, light=False):
@@ -138,11 +139,30 @@ for dpi, scale in DPI.items():
     print(f"mipmap-{dpi} 完成")
 
 (RES / "values").mkdir(exist_ok=True)
-# light 方案下自适应图标背景改白,其余保持品牌橙
+# 自适应图标背景:保持品牌橙(Android 7- 的旧启动器走 legacy 图标)
 bg = "#FFFFFF" if light else "#FF4F00"
 (RES / "values" / "ic_launcher_background.xml").write_text(
     f'<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <color name="ic_launcher_background">{bg}</color>\n</resources>\n',
     encoding="utf-8")
+
+# 自适应图标(Android 8+ 桌面)背景用对角渐变 drawable,与 legacy 图标观感一致
+c1, c2 = ("#FFFFFF", "#FFECD9") if light else ("#FF4F00", "#DE3600")
+(RES / "drawable").mkdir(exist_ok=True)
+(RES / "drawable" / "ic_launcher_gradient.xml").write_text(
+    '<?xml version="1.0" encoding="utf-8"?>\n'
+    '<shape xmlns:android="http://schemas.android.com/apk/res/android">\n'
+    '    <gradient android:type="linear" android:angle="315" '
+    f'android:startColor="{c1}" android:endColor="{c2}" />\n'
+    '</shape>\n',
+    encoding="utf-8")
+for xml_name in ["ic_launcher.xml", "ic_launcher_round.xml"]:
+    (RES / "mipmap-anydpi-v26" / xml_name).write_text(
+        '<?xml version="1.0" encoding="utf-8"?>\n'
+        '<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">\n'
+        f'    <background android:drawable="@drawable/ic_launcher_gradient"/>\n'
+        '    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>\n'
+        '</adaptive-icon>\n',
+        encoding="utf-8")
 
 for splash_png in RES.glob("drawable*/splash.png"):
     from PIL import Image as I
