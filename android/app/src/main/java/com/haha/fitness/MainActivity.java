@@ -1,4 +1,4 @@
-package com.example.exercises;
+package com.haha.fitness;
 
 import com.getcapacitor.BridgeActivity;
 
