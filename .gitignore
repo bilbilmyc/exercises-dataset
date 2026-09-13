@@ -10,3 +10,4 @@ __pycache__/
 # Capacitor / Android build artifacts
 node_modules/
 www/
+preview/

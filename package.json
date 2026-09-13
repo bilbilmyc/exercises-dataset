@@ -11,11 +11,14 @@
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",
+    "@capacitor/app": "^8.0.0",
     "@capacitor/cli": "^8.5.2",
     "@capacitor/core": "^8.5.2",
-    "@capacitor/app": "^8.0.0",
-    "@capacitor/status-bar": "^8.0.0",
     "@capacitor/splash-screen": "^8.0.0",
+    "@capacitor/status-bar": "^8.0.0",
     "@capacitor/toast": "^8.0.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.10.0"
   }
 }

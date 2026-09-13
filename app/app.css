@@ -49,3 +49,29 @@ button,
 .sidebar-body .search-wrapper {
   position: relative;
 }
+
+/* 详情弹窗:180px 源 GIF 不放大显示,居中保持最大清晰度 */
+.modal-gif {
+  display: block;
+  width: auto;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto;
+}
+.modal-media {
+  text-align: center;
+}
+
+/* 语言标签:单行横向滑动,不挤压换行 */
+.lang-tabs {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.lang-tabs::-webkit-scrollbar {
+  display: none;
+}
+.lang-tab {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}

@@ -69,11 +69,22 @@ cd android
 ./gradlew assembleDebug   # Windows 用 gradlew 或 gradlew.bat
 ```
 
-## 4. 安装到手机
+## 4. 电脑端预览(改界面先看效果)
+
+不想每次都装到手机看效果,可以在电脑上以真机视口预览(默认按小米 17 Pro Max 的 400×869 逻辑像素、3x 渲染):
+
+```bash
+python -m http.server 8642 -d www   # 终端 1:起本地服务(浏览器打开 http://localhost:8642 可直接点着玩)
+node scripts/preview.mjs            # 终端 2:自动截图到 preview/(主界面/搜索/筛选/详情弹窗/语言切换)
+```
+
+`scripts/preview.mjs` 依赖 `npm install -D puppeteer-core` 与本机 Edge;视口参数在脚本开头的 `setViewport` 处修改,即可模拟其他机型。
+
+## 5. 安装到手机
 
 把 APK 传到手机(数据线、网盘、IM 均可),点击安装,首次需在系统设置中允许「安装未知来源应用」。安装后**完全离线可用**,不需要任何网络与服务器。
 
-## 5. 常用自定义
+## 6. 常用自定义
 
 | 想改什么 | 改哪里 |
 |---|---|
@@ -84,7 +95,7 @@ cd android
 | 版本号 | `android/app/build.gradle` 的 `versionCode` / `versionName`,及根目录 `package.json` 的 `version` |
 | 应用标识 | `capacitor.config.json` 的 `appId`(改动后需删除 `android/` 重新 `npx cap add android`) |
 
-## 6. 构建管线说明
+## 7. 构建管线说明
 
 `npm run apk` 的内部流程:
 
@@ -101,7 +112,7 @@ cd android && gradlew assembleDebug
 - `www/` 与 `android/app/src/main/assets/public/` 都是**构建生成物**,已加入 `.gitignore`,不要手工修改;任何改动都应发生在仓库根目录或 `app/`,再重新打包。
 - 仓库根目录的 `index.html` 始终保持英文原版,转换只发生在构建产物中,便于合并上游更新。
 
-## 7. 注意事项
+## 8. 注意事项
 
 - 源数据 GIF 为 180×180,这是数据集自带的最高清晰度;如需更高清动画,保持同名覆盖 `videos/` 下的对应文件后重新打包即可。
 - 本指南产出的是 **debug 签名** APK,适合自用与分发安装;如需上架应用商店,需另外生成 keystore 并构建签名 release 包(`./gradlew assembleRelease`),本文不展开。
